@@ -39,6 +39,7 @@ set(tests
     square_root_operation
     store_operation
     sub_operation
+    test_simd_performance
     transpose_operation
     unary_minus_operation
     unary_not_operation

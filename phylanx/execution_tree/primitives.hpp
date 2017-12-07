@@ -19,6 +19,7 @@
 
 #include <phylanx/execution_tree/primitives/determinant.hpp>
 #include <phylanx/execution_tree/primitives/div_operation.hpp>
+#include <phylanx/execution_tree/primitives/div_operation_lambda.hpp>
 #include <phylanx/execution_tree/primitives/dot_operation.hpp>
 #include <phylanx/execution_tree/primitives/equal.hpp>
 #include <phylanx/execution_tree/primitives/exponential_operation.hpp>
@@ -45,6 +46,7 @@
 #include <phylanx/execution_tree/primitives/square_root_operation.hpp>
 #include <phylanx/execution_tree/primitives/store_operation.hpp>
 #include <phylanx/execution_tree/primitives/sub_operation.hpp>
+#include <phylanx/execution_tree/primitives/sub_operation_lambda.hpp>
 #include <phylanx/execution_tree/primitives/transpose_operation.hpp>
 #include <phylanx/execution_tree/primitives/unary_minus_operation.hpp>
 #include <phylanx/execution_tree/primitives/unary_not_operation.hpp>
