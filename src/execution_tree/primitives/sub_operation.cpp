@@ -62,7 +62,7 @@ namespace phylanx { namespace execution_tree { namespace primitives
       template <typename T>
       BLAZE_ALWAYS_INLINE decltype(auto) load(const T &a) const {
         BLAZE_CONSTRAINT_MUST_BE_SIMD_PACK(T);
-        return blaze::set(scalar_) - a;
+          return blaze::set(scalar_) - a;
       }
 
     private:

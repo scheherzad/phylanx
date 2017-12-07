@@ -4,7 +4,7 @@
 //  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include <phylanx/config.hpp>
-#include <phylanx/execution_tree/primitives/div_operation_old.hpp>
+#include <phylanx/execution_tree/primitives/div_operation_lambda.hpp>
 #include <phylanx/ir/node_data.hpp>
 
 #include <hpx/include/components.hpp>
@@ -21,24 +21,24 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 typedef hpx::components::component<
-phylanx::execution_tree::primitives::div_operation_old>
-        div_operation_old_type;
+phylanx::execution_tree::primitives::div_operation_lambda>
+        div_operation_lambda_type;
 HPX_REGISTER_DERIVED_COMPONENT_FACTORY(
-        div_operation_old_type, phylanx_div_operation_old_component,
+        div_operation_lambda_type, phylanx_div_operation_lambda_component,
 "phylanx_primitive_component", hpx::components::factory_enabled)
-HPX_DEFINE_GET_COMPONENT_TYPE(div_operation_old_type::wrapped_type)
+HPX_DEFINE_GET_COMPONENT_TYPE(div_operation_lambda_type::wrapped_type)
 
 ///////////////////////////////////////////////////////////////////////////////
 namespace phylanx { namespace execution_tree { namespace primitives
         {
             ///////////////////////////////////////////////////////////////////////////
-            std::vector<match_pattern_type> const div_operation_old::match_data =
+            std::vector<match_pattern_type> const div_operation_lambda::match_data =
                     {
-                            hpx::util::make_tuple("div", "_1 / __2", &create<div_operation_old>)
+                            hpx::util::make_tuple("div", "_1 / __2", &create<div_operation_lambda>)
                     };
 
             ///////////////////////////////////////////////////////////////////////////
-            div_operation_old::div_operation_old(std::vector<primitive_argument_type>&& operands)
+            div_operation_lambda::div_operation_lambda(std::vector<primitive_argument_type>&& operands)
                     : base_primitive(std::move(operands))
             {}
 
@@ -334,7 +334,7 @@ namespace phylanx { namespace execution_tree { namespace primitives
             }
 
             // implement '/' for all possible combinations of lhs and rhs
-            hpx::future<primitive_result_type> div_operation_old::eval(
+            hpx::future<primitive_result_type> div_operation_lambda::eval(
                     std::vector<primitive_argument_type> const& args) const
             {
                 if (operands_.empty())

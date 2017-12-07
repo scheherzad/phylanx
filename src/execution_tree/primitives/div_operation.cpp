@@ -16,8 +16,8 @@
 #include <numeric>
 #include <utility>
 #include <vector>
-
 #include <blaze/Math.h>
+#include <avx2intrin.h>
 
 ///////////////////////////////////////////////////////////////////////////////
 typedef hpx::components::component<
@@ -312,7 +312,7 @@ namespace phylanx { namespace execution_tree { namespace primitives
                     lhs.matrix() = blaze::map(
                             lhs.matrix(),
                             rhs.matrix(),
-                            [](double x1, double x2) { return x1 / x2; });
+                            divndnd_simd());
                     return primitive_result_type(std::move(lhs));
                 }
 
@@ -403,6 +403,7 @@ namespace phylanx { namespace execution_tree { namespace primitives
                 );
             }
         };
+
     }
 
     // implement '/' for all possible combinations of lhs and rhs

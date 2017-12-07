@@ -316,8 +316,32 @@ void test_div_operation_2d_lit()
 
     blaze::DynamicMatrix<double> expected =
         blaze::map(m1, m2, [](double x1, double x2) { return x1 / x2; });
+
     HPX_TEST_EQ(phylanx::ir::node_data<double>(std::move(expected)),
         phylanx::execution_tree::extract_numeric_value(f.get()));
+}
+void test_div_operation_2d_lit_old()
+{
+    blaze::Rand<blaze::DynamicMatrix<double>> gen{};
+    blaze::DynamicMatrix<double> m1 = gen.generate(42UL, 42UL);
+    blaze::DynamicMatrix<double> m2 = gen.generate(42UL, 42UL);
+
+    phylanx::ir::node_data<double> lhs(m1);
+
+    phylanx::execution_tree::primitive rhs =
+            hpx::new_<phylanx::execution_tree::primitives::variable>(
+                    hpx::find_here(), phylanx::ir::node_data<double>(m2));
+
+    phylanx::execution_tree::primitive div_old =
+            hpx::new_<phylanx::execution_tree::primitives::div_operation_lambda>(
+                    hpx::find_here(),
+                    std::vector<phylanx::execution_tree::primitive_argument_type>{
+                            std::move(lhs), std::move(rhs)});
+
+    hpx::future<phylanx::execution_tree::primitive_result_type> f_old = div_old.eval();
+    blaze::DynamicMatrix<double> expected =
+            blaze::map(m1, m2, [](double x1, double x2) { return x1 / x2; });
+
 }
 
 int main(int argc, char* argv[])
